@@ -4,16 +4,19 @@ require('dotenv').config()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 var { expressjwt: jwt } = require("express-jwt");
+// require('dotenv').config()
+// uri = process.env.URI
 
 process.env.SECRET
 
 app.use(express.json())
 app.use(morgan('dev'))
 
-mongoose.connect(
-  'mongodb+srv://xavior04350:XsN1IM4Rolp5zkit@xavior04350.7kyiwpi.mongodb.net/test',
-  () => console.log('Connected to the DB')
-)
+// mongoose.connect(
+//   '',
+//   () => console.log('Connected to the DB')
+// )
+mongoose.connect(uri, console.log("Connected to the DB"));
 
 app.use('/auth', require('./routes/authRouter.js'))
 app.use('/api', jwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) // req.user
