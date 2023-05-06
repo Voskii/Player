@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.game-container{
+  font-family: 'Aldrich', sans-serif;
+  width: 800px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 1px solid aqua;
+  border-radius: 10px;
+  padding: 17px;
+  /* box-shadow: 2px 2px 1px var(--p), 4px 4px 0 var(--dg), 6px 6px 1px var(--p); */
+}
+
+.welcome-text{
+  text-align: center;
+}
+
+.game-name{
+  text-shadow: 2px 2px 1px var(--p);
+}
+
+/* .app{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+} */
+
+/* .page{
+  max-width: fit-content;
+  max-height: fit-content;
+} */

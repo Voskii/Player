@@ -34,8 +34,8 @@ export default function Auth(){
   }
 
   return (
-    <div className="auth-container">
-      <h1>Todo App</h1>
+    <div className="cred-container">
+      <h1 className='game-name'>World Eater</h1>
       { !toggle ?
         <>
           <AuthForm 
