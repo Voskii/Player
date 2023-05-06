@@ -15,13 +15,14 @@ export default function Game(){
   const [walk, setWalk] = useState(false)
   const [pummel, setPummel] = useState(false)
   const [index, setIndex] = useState(0)
+  const [numba, setNumba] = useState(0)
+  const [buttArr, setButtArr] = useState(['Walk Again..','walk again lol','its Friday night 5/5/23 hurry up','really','I didnt want SALMON'])
   const enemies = [{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35  } , { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42  } , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35  } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65 } , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50 }];
   const welMsg = [
     "You just woke up on a cliff edge overlooking a vast valley full of canyons, waterfalls, lakes, forest, and loud beast howls. You see, what appears to be, a floating head. No it's a piece of toast.. with lumps, and a really great hair line. Like, it's just so great and thick and long. No reason for anyone to pick fun at this amazing hair line",
     `Well ${username}, we're fu@$ed :). My name is Lumpy Toast and I smelled ya from a far so I thought I would see wth it was. I'll help you around since you seem lost. We should look for a giant f%^in leaf or something for shelter. I'm not taking you back to my place. My wife 'smooth Toast', wouldn't like you're smelly a%#`,
     "Let's beat it already, you need a shower 'Push w'"]
   const whatsApp = "Push 'w' to walk, Push 'i' for inventory, Push 'p' for stats: "
-  let buttArr = ['Walk Again..','walk again lol','its Friday night 5/5/23 hurry up','really','I didnt want SALMON']
 
   const scene = () => {
       console.log('scene clicked')
@@ -43,12 +44,15 @@ export default function Game(){
   const chance = () => {
     const roll = Math.random();
     console.log("chance func");
-      // while (roll < 0.25){
-      //     woahBro();
-      //     break;
-      // }
-      buttArr = buttArr.sort(() => Math.random() - 0.5)
+      while (roll < 0.25){
+          woahBro();
+          //GAME GO HERE BOOBOO!! (what happens after woahBro is called)
+          break;
+      }
+    setNumba(Math.floor(Math.random() * buttArr.length))
   }
+
+
 
   console.log(userState)
 
@@ -58,7 +62,7 @@ export default function Game(){
       {walk && 
         <div>
           <h1>...Walking...</h1>
-          <button onClick={chance}>{buttArr}</button>
+          <button onClick={chance}>{buttArr[numba]}</button>
         </div>
       }
     </div>
