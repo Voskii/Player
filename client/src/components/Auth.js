@@ -34,7 +34,7 @@ export default function Auth(){
   }
 
   return (
-    <div className="cred-container">
+    <div className="cred-container wrap">
       <h1 className='game-name'>World Eater</h1>
       { !toggle ?
         <>

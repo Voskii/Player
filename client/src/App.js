@@ -7,14 +7,23 @@ import Public from './components/Public.js'
 import ProtectedRoute from './components/ProtectedRoute.js'
 import { GameContext } from './context/GameProvider.js'
 import { UserContext } from './context/UserProvider.js'
+import Header from './components/Header.js'
+import { useMediaQuery } from 'react-responsive'
+import Footer from './components/Footer.js'
 
 export default function App(){
   const { token, logout } = useContext(UserContext)
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   console.log(UserContext)
   return (
     <div className="app">
-      <div className='page'>
-        { token && <Navbar logout={logout}/>}
+      <div className='page wrap'>
+        { token && 
+        <div className={isTabletOrMobile? 'sticky-box shrink' : 'sticky-box'}>
+          <Header />
+        <Navbar logout={logout}/>
+        </div>
+        }
         <Routes>
           <Route 
             path="/" 
@@ -33,6 +42,7 @@ export default function App(){
               </ProtectedRoute>}
           />
         </Routes>
+        {/* { token && <Footer />} */}
       </div>
     </div>
   )

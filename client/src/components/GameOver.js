@@ -12,9 +12,9 @@ export default function GameOver(){
     return (
         <div>
             <div style={{textAlign: 'center'}}>
-                <h1>GAME OVER</h1>
+                <h1 className="game-over-text">GAME OVER</h1>
                 <form>
-                    <button>Resterrt</button>
+                    <button className="game">Resterrt</button>
                 </form>
             </div>
         </div>

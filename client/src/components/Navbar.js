@@ -5,9 +5,7 @@ export default function Navbar(props){
   const { logout } = props
   return (
     <div className="navbar">
-      <Link to="/game">Game</Link>
-      <Link to="/public">Public</Link>
-      <button onClick={logout}>Logout</button>
+      <button onClick={logout} className='game logButt'>Logout</button>
     </div>
   )
 }

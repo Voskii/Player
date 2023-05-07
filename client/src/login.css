@@ -5,6 +5,24 @@
     --c: #0FF;
     --m: #F03;
     --p: #0FF;
+    --primary: #7fff00; /* */
+    --onprimary: #000000; /* */
+    --secondary: #000000; /* */
+    --onsecondary: #000000; /* */
+    --tertiary: #1f1fff; /* */
+    --ontertiary: #ffffff; /* */
+    --page: #fcf340; /* */
+    --onpage: #ffffff; /* */
+    --detail: #03dddc; /* */
+    --detail2: #fb33db; /* */
+    --speed: 500ms;
+  
+    /*fb33db Verdana, sans-serif;*/
+  
+    --font: 1rem Cyberway Riders;
+    --header-font: lighter 6rem Cyberway Riders;
+    --title-font: lighter 2rem "Monoton", cursive;
+    --quote-font: lighter 1.5rem "Monoton", cursive;
     
   }
   
@@ -38,8 +56,8 @@
   
   .cred-container {
     font-family: 'Aldrich', sans-serif;
-    width: 100%;
-    height: 100%;
+    width: fit-content;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;

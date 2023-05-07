@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import TodoForm from './TodoForm.js'
 import TodoList from './TodoList.js'
 import Todo from './Todo.js'
@@ -72,7 +72,7 @@ export default function Game(){
   }
 
   const restart = () => {
-   
+
   }
 
   const popItem = (item, index) => {
@@ -119,36 +119,45 @@ export default function Game(){
     
     setEndGame(true)
   }
-  console.log(`UserHP: ${userState.health}, BossHP: ${boss.health}`)
+  console.log(`UserHP: ${userState.health}, BossHP: ${bossState.health}`)
+
+
+//   useEffect(() => {
+
+
+// },[userState.health] || [bossState.health])
 
   return (
-    <div className="game game-container">
-      {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index}/>}
-      {walk && !die && !endGame ?
+    <section className="game game-container wrap">
+      
+        {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index}/>}
         <div>
-          {itemPower? 
-            <h3>{itemPower}</h3>
-          :
-            <h1>...Walking...</h1>
-          }
-          <button onClick={chance}>{buttArr[numba]}</button>
-          {inventory[0] !== undefined &&
-            <div>
-              <button onClick={() => setWhatsBag(!whatsBag)}>Bag</button>
-              {whatsBag && <ul>{mapMe}</ul>}
-            </div>
-          }
-        </div>
-      : die && !walk && !endGame ?
-        <button onClick={() => breakableWill()}>Oh S%&*</button>
-      : die && endGame && !walk &&
-        <div>
-          {itemPower && <h3>{itemPower}</h3>}
-          <GameOver />
-        </div>
-      }
-      {pummel && <BossFight restart={restart} username={username} enemy={boss} userState={userState} setUserState={setUserState} pummel={pummel} setPummel={setPummel} bossState={bossState} setBossState={setBossState} walk={walk} setWalk={setWalk} enemies={enemies} setEnemies={setEnemies} inventory={inventory} setInventory={setInventory}/>}
-    </div>
+        {walk && !die && !endGame ?
+          <div >
+            {itemPower? 
+              <h3>{itemPower}</h3>
+            :
+              <h1>...Walking...</h1>
+            }
+            <button onClick={chance} className="game">{buttArr[numba]}</button>
+            {inventory[0] !== undefined &&
+              <div>
+                <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>
+                {whatsBag && <ul>{mapMe}</ul>}
+              </div>
+            }
+          </div>
+        : die && !walk && !endGame ?
+          <button onClick={() => breakableWill()} className="game">Oh S%&*</button>
+        : die && endGame && !walk &&
+          <div>
+            {itemPower && <h3>{itemPower}</h3>}
+            <GameOver />
+          </div>
+        }
+        {pummel && <BossFight restart={restart} username={username} enemy={boss} userState={userState} setUserState={setUserState} pummel={pummel} setPummel={setPummel} bossState={bossState} setBossState={setBossState} walk={walk} setWalk={setWalk} enemies={enemies} setEnemies={setEnemies} inventory={inventory} setInventory={setInventory}/>}
+      </div>
+    </section>
   )
 }
 

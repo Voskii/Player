@@ -42,7 +42,7 @@ export default function BossFight(props){
             setBattleText(prev => [
             ...prev,
             `${username} tried to run, ${enemy.name} slaps for ${rNum} reducing ${username}'s HP to ${userState.health - rNum} lol`
-        ])
+            ])
         }
     }
 
@@ -50,7 +50,7 @@ export default function BossFight(props){
         const rNum = Math.ceil(Math.random() * (enemy.max - enemy.min) + enemy.min)
         setBattleText(prev => [
             ...prev,
-            `${enemy.name} slaps ${username} for ${rNum} reducing ${username}HP to ${userState.health - rNum}`
+            `${enemy.name} slaps ${username} for ${rNum} reducing ${username}HP to ${userState.health - (rNum*rNum)}`
         ])
         setPummel(!pummel)
         setWalk(!walk)
@@ -58,28 +58,30 @@ export default function BossFight(props){
 
     const throatPunch = () => {
 
-        const rNum = Math.ceil(Math.random() * (enemy.max - enemy.min) + enemy.min)
+        const rNumBoss = Math.ceil(Math.random() * (enemy.max - enemy.min) + enemy.min)
+        const rNumPlayer = Math.ceil(Math.random() * (enemy.max - enemy.min) + enemy.min)
         setBossState(prev => {
             return ({
                 ...prev,
-                health: prev.health -= rNum
+                health: prev.health -= rNumPlayer
             })
         })
         setBattleText(prev => [
             ...prev,
-            `${username} slaps for ${rNum} reducing ${enemy.name}HP to ${bossState.health - rNum}`
+            `${username} slaps ${enemy.name} for ${rNumPlayer} reducing ${enemy.name} to ${bossState.health}HP`
+
         ])
         setUserState(prev => {
             return ({
                 ...prev,
-                health: prev.health -= rNum
+                health: prev.health -= rNumBoss
             })
         })
         setBattleText(prev => [
-            ...prev,
-            `${enemy.name} slaps ${username} for ${rNum} reducing ${username}HP to ${userState.health - rNum}`
+        ...prev,
+        `  ${enemy.name} slaps ${username} for ${rNumBoss} reducing ${username}'s HP to ${userState.health} lol`
         ])
-        
+//cant render battleText during fight function, current state is behind
     }
 
     const restart = () => {
@@ -98,39 +100,46 @@ export default function BossFight(props){
     }
 
     useEffect(() => {
-        if(userState.health <= 0 ){
-        setGameOver(true)
-    } else if (bossState.health <= 0){
-        setDub(!dub)
-    }
-    },[userState.health])
     
+                if(userState.health <= 0 ){
+                setGameOver(true)
+            } else if (bossState.health <= 0){
+                setDub(!dub)
+            }
+            },[userState.health] || [bossState.health])
+
     return (
-        <div>
-            <div>
-                {battleText.map(line => <h4 key={key++}>{line}</h4>)}
+        <div >
+            <div className="battle-container">
+                {battleText.map(line => <h4 className='battle-text' key={key++}>{line}</h4>)}
                 {!gameOver && !dub &&
                     <div>
-                        {isRunning && <button onClick={running}>Peace</button>}
-                        {!isRunning && <button onClick={tryRun}>Run</button>}
-                        {!isRunning && <button onClick={throatPunch}>Throat Punch</button>}
+                        {isRunning ?
+                            <button onClick={running} className="game">Peace</button>
+                        :
+                            <div>
+                                <button onClick={tryRun} className="game">Run</button>
+                                <button onClick={throatPunch} className="game">Throat Punch</button>
+                            </div>
+                        }
+                        
                     </div>
                 }
             </div>
-            {gameOver &&
-                <div style={{textAlign: 'center'}}>
-                    <h1>GAME OVER</h1>
-                    <form onSubmit={restart}>
-                        <button>Resterrt</button>
-                    </form>
-                </div>
-            }
-            {dub && 
-                <div style={{textAlign: 'center'}}>
-                    <h1>You Won!</h1>
-                    <button onClick={prog}>Sweet</button>
-                </div>
-            }
+                {gameOver &&
+                    <div style={{textAlign: 'center'}}>
+                        <h1>GAME OVER</h1>
+                        <form onSubmit={restart}>
+                            <button className="game">Resterrt</button>
+                        </form>
+                    </div>
+                }
+                {dub && 
+                    <div style={{textAlign: 'center'}}>
+                        <h1>You Won!</h1>
+                        <button onClick={prog} className="game">Sweet</button>
+                    </div>
+                }
         </div>
     )
 }
