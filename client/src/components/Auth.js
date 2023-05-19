@@ -45,7 +45,7 @@ export default function Auth(){
             btnText="Sign up"
             errMsg={errMsg}
           />
-          <p onClick={toggleForm}>Already a member?</p>
+          <p onClick={toggleForm}>Already a Champion?</p>
         </>
       :
         <>
