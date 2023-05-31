@@ -75,9 +75,9 @@ li{
 }
 
 .game-container{
-  overflow: hidden;
+  overflow-y: scroll;
   max-width: 500px;
-  max-height: 800px;
+  max-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,6 +130,10 @@ li{
   padding: 20px;
   background-color: var(--dg);
   border: #fb33db double 8px;
+}
+
+.lumpy{
+  
 }
 
 .battle-container{

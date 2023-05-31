@@ -18,14 +18,15 @@ export default function Game(){
   const [bossState, setBossState] = useState({})
   const [itemPower, setItemPower] = useState()
   const [boss, setBoss] = useState('')
-  const [enemies, setEnemies] = useState([{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35, _id: 0 } , { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42, _id: 1 } , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35, _id: 2 } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 , _id: 3 } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65, _id: 4 } , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50, _id: 5 }])
+  const [enemies, setEnemies] = useState([{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35, _id: 0 }])
+  // { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42, _id: 1 } , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35, _id: 2 } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 , _id: 3 } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65, _id: 4 } , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50, _id: 5 }
   console.log('BAG:', inventory, 'BOSSES', enemies)
   const [welcome, setWelcome] = useState(true)
   const [walk, setWalk] = useState(false)
   const [pummel, setPummel] = useState(false)
   const [index, setIndex] = useState(0)
   const [numba, setNumba] = useState(0)
-  const [unbw, setUnbW] = useState(false)
+  const [unbw, setUnbw] = useState(false)
   const [die, setDie] = useState(false)
   const [endGame, setEndGame] = useState(false)
   const [buttArr, setButtArr] = useState(['Walk Again..','walk again lol','its Friday night 5/5/23 hurry up','really','I didnt want SALMON'])
@@ -87,7 +88,6 @@ export default function Game(){
       setInventory(prev => prev.filter(index => index.item !== item))
       setEnemies(enemies.filter(meanie => meanie._id !== rndBoss._id))
   } else if(item === "Unbreakable Will"){
-      setUnbW(true)
       setItemPower(`This is an unknown passive effect`)
   } else if(item === "Snow White's Apple"){
       setItemPower(`You attempt to eat Snow White's Apple, Lumpy toast - 'My brother in christ, no time for naps!`)
@@ -102,10 +102,13 @@ export default function Game(){
     })
       setItemPower(`You are a thicc ${userState.health}HP . You wrestle on Thanos' gauntlet and snap your fingers ${userState.health} ...you've lost half your HP. *Lumpy Toast laughs*`)
       setInventory(prev => prev.filter(index => index.item !== item))
-  } else if(item === "Breakable Will" && inventory.indexOf('Unbreakable Will') !== -1){
-      setItemPower("Breakable will attempts to kill you but the passive effect from Unbreakable will takes your place. Both items wither away.");
-      setInventory(prev => prev.filter(index => index.item !== item || 'Unbreakable Will'))
-      
+      //below is prob the issue line 106
+  } else if(item === "Breakable Will" && unbw){
+      setItemPower("Breakable will attempts to kill you but the passive effect from Unbreakable will take your place. Both items wither away.");
+      // setInventory(prev => prev.filter(index => index.item !== item || 'Unbreakable Will'))
+      setInventory(prev => prev.filter(function(index){
+        return index.item !== item && index.item !== 'Unbreakable Will'
+      }))
   }  else if(item === "Breakable Will"){
       setItemPower("Breakable will stops your heart. ");
       setDie(true)
@@ -148,14 +151,17 @@ export default function Game(){
             }
           </div>
         : die && !walk && !endGame ?
-          <button onClick={() => breakableWill()} className="game">Oh S%&*</button>
+            <div>
+              <h3>{itemPower}</h3>
+              <button onClick={() => breakableWill()} className="game">Oh S%&*</button>
+            </div>
         : die && endGame && !walk &&
           <div>
             {itemPower && <h3>{itemPower}</h3>}
             <GameOver />
           </div>
         }
-        {pummel && <BossFight restart={restart} username={username} enemy={boss} userState={userState} setUserState={setUserState} pummel={pummel} setPummel={setPummel} bossState={bossState} setBossState={setBossState} walk={walk} setWalk={setWalk} enemies={enemies} setEnemies={setEnemies} inventory={inventory} setInventory={setInventory}/>}
+        {pummel && <BossFight restart={restart} username={username} enemy={boss} userState={userState} setUserState={setUserState} pummel={pummel} setPummel={setPummel} bossState={bossState} setBossState={setBossState} walk={walk} setWalk={setWalk} enemies={enemies} setEnemies={setEnemies} inventory={inventory} setInventory={setInventory} setUnbw={setUnbw} setDie={setDie}/>}
       </div>
     </section>
   )
