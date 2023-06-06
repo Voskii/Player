@@ -75,7 +75,7 @@ li{
 }
 
 .game-container{
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-width: 500px;
   max-height: 400px;
   display: flex;
@@ -92,6 +92,7 @@ li{
 .welcome-text{
   text-align: center;
   transition: var(--speed);
+  color: var(--detail2)
 }
 
 .game-name{
@@ -100,12 +101,12 @@ li{
   color: aqua
 }
 
-.game{
+/* .game{
   border: 1px solid;
-  background-color: #fcf340;
+  background-color: #888431;
   color: var(--detail2);
 
-}
+} */
 
 .battle-text{
   border: #fb33db inset 1px;
@@ -130,6 +131,57 @@ li{
   padding: 20px;
   background-color: var(--dg);
   border: #fb33db double 8px;
+}
+
+.walking{
+  color: #fb33db;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background: url('./images/bg2.gif');
+  /* background-repeat: no-repeat; */
+  width: 500px;
+  height: 470px;
+  overflow: hidden;
+  border: #fb33db double 8px;
+}
+
+.wg1{
+  grid-column: 1/1;
+  grid-row: 1/1;
+  text-align: center;
+}
+
+.wg2{
+  grid-column: 2/2;
+  grid-row: 1/1;
+  text-align: center;
+}
+
+.wg3{
+  grid-column: 1/1;
+  grid-row: 2/2;
+}
+
+.wg4{
+  grid-column: 2/2;
+  grid-row: 2/2;
+}
+
+.playerChar{
+  transform: scale(.8);
+}
+
+.chanceButt{
+  transform: scale(.7);
+  height: fit-content;
+  width: fit-content;
+  color: #fb33db;
+}
+
+li::marker {
+  content: '✝ ';
+  font-size: 1.2em;
 }
 
 .lumpy{

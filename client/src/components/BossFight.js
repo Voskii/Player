@@ -134,6 +134,7 @@ export default function BossFight(props){
                             <button onClick={running} className="game">Peace</button>
                         :
                             <div>
+                                <img src={bossState.facing_sprite.voskiF} className='playerChar wg3'/>
                                 <button onClick={tryRun} className="game">Run</button>
                                 <button onClick={throatPunch} className="game">Throat Punch</button>
                             </div>

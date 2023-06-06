@@ -7,7 +7,10 @@ import BossFight from './BossFight.js'
 import GameOver from './GameOver.js'
 import { UserContext } from '../context/UserProvider.js'
 import { GameContext } from '../context/GameProvider.js'
-import { set } from 'mongoose'
+import playerWalk from "../images/playerwalking.gif"
+import voskiF from '../images/voskifacing.gif'
+import voskiA from '../images/voskiattack.gif'
+import voskiW from '../images/voskiwalking.gif'
 
 
 export default function Game(){
@@ -18,8 +21,7 @@ export default function Game(){
   const [bossState, setBossState] = useState({})
   const [itemPower, setItemPower] = useState()
   const [boss, setBoss] = useState('')
-  const [enemies, setEnemies] = useState([{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35, _id: 0 }])
-  // { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42, _id: 1 } , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35, _id: 2 } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 , _id: 3 } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65, _id: 4 } , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50, _id: 5 }
+  const [enemies, setEnemies] = useState([{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35, _id: 0, facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA}  } , { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42, _id: 1 , facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA}} , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35, _id: 2 , facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA} } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 , _id: 3 , facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA} } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65, _id: 4  , facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA}} , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50, _id: 5 , facing_sprite: {voskiF}, walking_sprite: {voskiW}, attacking_sprite: {voskiA} }])
   console.log('BAG:', inventory, 'BOSSES', enemies)
   const [welcome, setWelcome] = useState(true)
   const [walk, setWalk] = useState(false)
@@ -136,19 +138,22 @@ export default function Game(){
         {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index}/>}
         <div>
         {walk && !die && !endGame ?
-          <div >
-            {itemPower? 
-              <h3>{itemPower}</h3>
-            :
-              <h1>...Walking...</h1>
-            }
-            <button onClick={chance} className="game">{buttArr[numba]}</button>
-            {inventory[0] !== undefined &&
-              <div>
-                <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>
-                {whatsBag && <ul>{mapMe}</ul>}
-              </div>
-            }
+          <div className='walking'>
+            
+              {itemPower? 
+                <h3 className='wg1'>{itemPower}</h3>
+              :
+                <h1 className='wg1'>...Walking...</h1>
+              }
+              <button onClick={chance} className="game chanceButt">{buttArr[numba]}</button>
+              <img src={playerWalk} className='playerChar wg3'/>
+              {inventory[0] !== undefined &&
+                <div className='wg4'>
+                  <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>
+                  {whatsBag && <ul className=''>{mapMe}</ul>}
+                </div>
+              }
+              
           </div>
         : die && !walk && !endGame ?
             <div>
