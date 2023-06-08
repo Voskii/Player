@@ -8,6 +8,8 @@ import GameOver from './GameOver.js'
 import { UserContext } from '../context/UserProvider.js'
 import { GameContext } from '../context/GameProvider.js'
 import playerWalk from "../images/playerwalking.gif"
+import playerF from '../images/playerfacing.png'
+import playerA from '../images/playerattacking.gif'
 import voskiF from '../images/voskifacing.gif'
 import voskiA from '../images/voskiattack.gif'
 import voskiW from '../images/voskiwalking.gif'
@@ -17,7 +19,7 @@ export default function Game(){
   const {inventory, setInventory} = useContext(GameContext)
   const { user: {username}, addTodo, todos} = useContext(UserContext)
   const [whatsBag, setWhatsBag] = useState(false)
-  const [userState, setUserState] = useState({info: '', health: 2350})
+  const [userState, setUserState] = useState({info: '', health: 2350, facing_sprite: {playerF}, walking_sprite: {playerWalk}, attacking_sprite: {playerA}})
   const [bossState, setBossState] = useState({})
   const [itemPower, setItemPower] = useState()
   const [boss, setBoss] = useState('')
@@ -102,7 +104,7 @@ export default function Game(){
             health: prev.health * .5
         })
     })
-      setItemPower(`You are a thicc ${userState.health}HP . You wrestle on Thanos' gauntlet and snap your fingers ${userState.health} ...you've lost half your HP. *Lumpy Toast laughs*`)
+      setItemPower(`You are a thicc ${userState.health * .5}HP . You wrestle on Thanos' gauntlet and snap your fingers ${userState.health} ...you've lost half your HP. *Lumpy Toast laughs*`)
       setInventory(prev => prev.filter(index => index.item !== item))
       //below is prob the issue line 106
   } else if(item === "Breakable Will" && unbw){

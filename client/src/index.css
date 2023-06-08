@@ -77,7 +77,7 @@ li{
 .game-container{
   /* overflow-y: scroll; */
   max-width: 500px;
-  max-height: 400px;
+  max-height: 470px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,8 +109,8 @@ li{
 } */
 
 .battle-text{
-  border: #fb33db inset 1px;
-  background-color: var(--dg);
+  /* border: #fb33db inset 1px; */
+  
   padding: 20px;
   color:aqua;
 }
@@ -180,17 +180,48 @@ li{
 }
 
 li::marker {
-  content: '✝ ';
+  content: '✝';
   font-size: 1.2em;
 }
 
-.lumpy{
+.battle-container{
+  color: #fb33db;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background: url('./images/arena.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
+  width: 500px;
+  height: 470px;
+  
+  border: #fb33db double 8px;
+  text-align: center;
+}
+
+.bg1{
+  grid-column: 1/1;
+  grid-row: 1/1;
+  overflow-y: hidden;
+}
+
+.bg2{
+  grid-column: 2/2;
+  grid-row: 1/1;
   
 }
 
-.battle-container{
-  /* overflow: hidden; */
+.bg3{
+  grid-column: 1/1;
+  grid-row: 2/2;
 }
+
+.bg4{
+  grid-column: 2/2;
+  grid-row: 2/2;
+}
+
 
 /* .app{
   display: flex;
