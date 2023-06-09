@@ -147,9 +147,8 @@ export default function BossFight(props){
             },[userState.health] || [bossState.health])
 
     return (
-        <div >
+        <div>
             <div className="">
-                
                 {!gameOver && !dub &&
                     <div className="battle-container">
                         {!gameOver && battleText.map(line => <h4 className='battle-text bg1' key={key++}>{line}</h4>)}
