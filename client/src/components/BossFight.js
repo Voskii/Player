@@ -151,7 +151,7 @@ export default function BossFight(props){
             <div className="">
                 {!gameOver && !dub &&
                     <div className="battle-container">
-                        {!gameOver && battleText.map(line => <h4 className='battle-text bg1' key={key++}>{line}</h4>)}
+                        {!gameOver && battleText.map(line => <li className='battle-text bg1' key={key++}>{line}</li>)}
                         {isRunning ?
                             <button onClick={running} className="game">Peace</button>
                         :startFight && !isRunning ?

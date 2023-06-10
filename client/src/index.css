@@ -203,7 +203,8 @@ li::marker {
 .bg1{
   grid-column: 1/1;
   grid-row: 1/1;
-  overflow-y: hidden;
+  height: fit-content;
+  overflow-wrap: hidden;
 }
 
 .bg2{
