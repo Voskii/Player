@@ -66,7 +66,9 @@ export default function BossFight(props){
     }
 
     const throatPunch = () => {
+        
         console.log(`TP UserHP: ${userState.health}, BossHP: ${bossState.health}`)
+        charsAttack()
         const rNumBossDmg = Math.floor(Math.random() * (enemy.max - enemy.min) + enemy.min)
         const rNumPlayerDmg = Math.floor(Math.random() * (enemy.max - enemy.min) + enemy.min)
         const chonkBoss = bossState.health -= rNumPlayerDmg
@@ -79,8 +81,9 @@ export default function BossFight(props){
             })
         })
         setBattleText(prev => [
-            ...prev,
-            `${username} slaps ${enemy.name} for ${rNumPlayerDmg} reducing ${enemy.name} to ${chonkBoss}HP`
+            
+            `${username} slaps ${enemy.name} for ${rNumPlayerDmg} reducing ${enemy.name} to ${chonkBoss}HP`,
+            `${enemy.name} slaps ${username} for ${rNumBossDmg} reducing ${username}'s HP to ${chonkMe}`
 
         ])
         console.log(`Player hit for ${rNumPlayerDmg}`)
@@ -90,11 +93,11 @@ export default function BossFight(props){
                 health: chonkMe
             })
         })
-        setBattleText(prev => [
-        ...prev,
-        `${enemy.name} slaps ${username} for ${rNumBossDmg} reducing ${username}'s HP to ${chonkMe}`
-        ])
-        charsAttack()
+        // setBattleText(prev => [
+        // ...prev,
+        // `${enemy.name} slaps ${username} for ${rNumBossDmg} reducing ${username}'s HP to ${chonkMe}`
+        // ])
+        
         setStartFight(false)
         console.log(`Boss hit for ${rNumBossDmg}`)
         console.log(`scene clicked:`, index)
@@ -130,7 +133,7 @@ export default function BossFight(props){
     const charsAttack = () => {
         //setAttack state to true and enable char fighting css ~500ms
         setAttack(true)
-        const id = setInterval(() => setAttack(false), 650)
+        const id = setInterval(() => setAttack(false), 1000)
         return function cleanup(){
             clearInterval(id)
         }
@@ -150,22 +153,27 @@ export default function BossFight(props){
         <div>
             <div className="">
                 {!gameOver && !dub &&
-                    <div className="battle-container">
-                        {!gameOver && battleText.map(line => <li className='battle-text bg1' key={key++}>{line}</li>)}
+                    <div className="">
+                        
                         {isRunning ?
-                            <button onClick={running} className="game">Peace</button>
+                            <div className="battle-container">
+                                {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
+                                <button onClick={running} className="game" style={{transform: 'scale(.5)'}}>Peace</button>
+                            </div>
                         :startFight && !isRunning ?
-                            <div>
-                                <img src={bossState.facing_sprite.voskiF} className='playerChar wg3'/>
-                                <button onClick={tryRun} className="game bg2">Run</button>
-                                <button onClick={throatPunch} className="game bg2">Throat Punch</button>
+                            <div className="battle-container">
+                                {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
+                                <img src={bossState.facing_sprite} className='bg2' style={{transform: 'scale(2)'}}/>
+                                <button onClick={tryRun} className="game bg3" style={{transform: 'scale(.5)'}}>Run</button>
+                                <button onClick={throatPunch} className="game bg4" style={{transform: 'scale(.5)'}}>Throat Punch</button>
                             </div>
                         :!startFight && !isRunning &&
-                            <div className="">
-                                <img src={attack? bossState.attacking_sprite.voskiA : bossState.facing_sprite.voskiF} className='playerChar bg4'/>
-                                <button onClick={tryRun} className="game bg2">Run</button>
-                                <button onClick={throatPunch} className="game bg2">Throat Punch</button>
-                                <img src={attack? userState.attacking_sprite.playerA : userState.facing_sprite.playerF} className="playerChar bg3"/>
+                            <div className="battle-container">
+                                {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
+                                <img src={attack? bossState.attacking_sprite : bossState.facing_sprite} className=' bg4'/>
+                                <button onClick={tryRun} className="game bg1" style={{transform: 'scale(.5)'}}>Run</button>
+                                <button onClick={throatPunch} className="game bg2" style={{transform: 'scale(.5)'}}>Throat Punch</button>
+                                <img src={attack? userState.attacking_sprite.playerA : userState.facing_sprite.playerF} className=" bg3"/>
                             </div>
                         }
                         
@@ -175,7 +183,7 @@ export default function BossFight(props){
                 {gameOver &&
                     <div style={{textAlign: 'center'}}>
                         <h1 className="game-over-text">GAME OVER</h1>
-                        {lumpyWins && <h2 className="battle-text">Lumpy Toast stab in back - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'</h2>}
+                        {lumpyWins && <h2 className="battle-text">Lumpy Toast decapitates you lol - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'</h2>}
                         <form onSubmit={restart}>
                             <button className="game">Resterrt</button>
                         </form>
@@ -183,7 +191,7 @@ export default function BossFight(props){
                 }
                 {dub && !gameOver &&
                     <div style={{textAlign: 'center'}}>
-                        <h1>You Won!</h1>
+                        <h1>You Won the Fight!</h1>
                         <button onClick={prog} className="game">Sweet</button>
                     </div>
                 }
