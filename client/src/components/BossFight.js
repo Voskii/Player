@@ -154,7 +154,6 @@ export default function BossFight(props){
             <div className="">
                 {!gameOver && !dub &&
                     <div className="">
-                        
                         {isRunning ?
                             <div className="battle-container">
                                 {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
@@ -170,13 +169,12 @@ export default function BossFight(props){
                         :!startFight && !isRunning &&
                             <div className="battle-container">
                                 {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
-                                <img src={attack? bossState.attacking_sprite : bossState.facing_sprite} className=' bg4'/>
+                                <img src={attack? bossState.attacking_sprite : bossState.facing_sprite} className={attack? 'bg4 batk' : 'bg4'}/>
                                 <button onClick={tryRun} className="game bg1" style={{transform: 'scale(.5)'}}>Run</button>
                                 <button onClick={throatPunch} className="game bg2" style={{transform: 'scale(.5)'}}>Throat Punch</button>
-                                <img src={attack? userState.attacking_sprite.playerA : userState.facing_sprite.playerF} className=" bg3"/>
+                                <img src={attack? userState.attacking_sprite : userState.facing_sprite} className={attack? 'bg3 patk' : 'bg3'}/>
                             </div>
                         }
-                        
                     </div>
                 }
             </div>

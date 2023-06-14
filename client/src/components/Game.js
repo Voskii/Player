@@ -7,29 +7,25 @@ import BossFight from './BossFight.js'
 import GameOver from './GameOver.js'
 import { UserContext } from '../context/UserProvider.js'
 import { GameContext } from '../context/GameProvider.js'
-import playerWalk from "../images/playerwalking.gif"
-import playerF from '../images/playerfacing.png'
-import playerA from '../images/playerattacking.gif'
+import { set } from 'mongoose'
 
 
 
 export default function Game(){
-  const {inventory, setInventory, enemies, setEnemies} = useContext(GameContext)
+  const {inventory, setInventory, enemies, setEnemies, userState, setUserState, index, setIndex, walk, setWalk, welcome, setWelcome} = useContext(GameContext)
   const { user: {username}, addTodo, todos} = useContext(UserContext)
   const [whatsBag, setWhatsBag] = useState(false)
-  const [userState, setUserState] = useState({info: '', health: 2350, facing_sprite: {playerF}, walking_sprite: {playerWalk}, attacking_sprite: {playerA}})
   const [bossState, setBossState] = useState({})
   const [itemPower, setItemPower] = useState()
   const [boss, setBoss] = useState('')
   
   console.log('BAG:', inventory, 'BOSSES', enemies)
-  const [welcome, setWelcome] = useState(true)
-  const [walk, setWalk] = useState(false)
   const [pummel, setPummel] = useState(false)
-  const [index, setIndex] = useState(0)
+  
   const [numba, setNumba] = useState(0)
   const [unbw, setUnbw] = useState(false)
   const [die, setDie] = useState(false)
+  const [playerSelect, setPlayerSelect] = useState(false)
   const [endGame, setEndGame] = useState(false)
   const [buttArr, setButtArr] = useState(['Walk Again..','walk again lol','its Friday night 5/5/23 hurry up','really','I didnt want SALMON'])
   // const enemies = [{ name: 'CAPTAIN CASSIE', health: 150, item: 'the HIDDEN YouTube dislike button', min: 25, max: 35  } , { name: "JACOB 'THE PEACEKEEPER'", health: 150, item: 'order 66', min: 38, max: 42  } , { name: 'Ty Rex', health: 150, item: 'Unbreakable Will', min: 25, max: 35  } , { name: 'CAPTAIN CASSIE FADE', health: 280, item: "Snow White's Apple", min: 30, max: 50 } , { name: "JACOB 'THE PEACEKEEPER' FADE", health: 280, item: "Thanos' Gauntlet Snap", min: 50, max: 65 } , { name: 'Ty Rex FADE', health: 300, item: 'Breakable Will', min: 35, max: 50 }];
@@ -38,16 +34,19 @@ export default function Game(){
     `Well ${username}, we're fu@$ed :). My name is Lumpy Toast and I smelled ya from a far so I thought I would see wth it was. I'll help you around since you seem lost. We should look for a giant f%^in leaf or something for shelter. I'm not taking you back to my place. My wife 'smooth Toast', wouldn't like you're smelly a%#`,
     "Let's beat it already, you need a shower. You can trust me, this way.."]
   const whatsApp = "Push 'w' to walk, Push 'i' for inventory, Push 'p' for stats: "
-
-  const scene = () => {
-      console.log('scene clicked')
-      if(index === 2){
-        setWalk(!walk)
-        setWelcome(false)
-      }
-      setIndex(prev => prev+1)
-  }
   
+  const scene = () => {
+    console.log('scene clicked')
+    if(index === 2){
+      setPlayerSelect(true)
+    }
+    if(index === 3){
+      setWalk(!walk)
+      setWelcome(false)
+    }
+    setIndex(prev => prev+1)
+}
+
   const handleChange = (e) => {
     const {name, value} = e.target
     setUserState({
@@ -104,7 +103,7 @@ export default function Game(){
     })
       setItemPower(`You are a thicc ${userState.health * .5}HP . You wrestle on Thanos' gauntlet and snap your fingers ${userState.health} ...you've lost half your HP. *Lumpy Toast laughs*`)
       setInventory(prev => prev.filter(index => index.item !== item))
-      //below is prob the issue line 106
+      
   } else if(item === "Breakable Will" && unbw){
       setItemPower("Breakable will attempts to kill you but the passive effect from Unbreakable will take your place. Both items wither away.");
       // setInventory(prev => prev.filter(index => index.item !== item || 'Unbreakable Will'))
@@ -135,7 +134,8 @@ export default function Game(){
   return (
     <section className="game game-container wrap">
       
-        {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index}/>}
+        {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index} playerSelect={playerSelect} setPlayerSelect={setPlayerSelect}/>}
+        
         <div>
         {walk && !die && !endGame ?
           <div className='walking'>
@@ -146,7 +146,7 @@ export default function Game(){
                 <h1 className='wg1'>...Walking...</h1>
               }
               <button onClick={chance} className="game chanceButt">{buttArr[numba]}</button>
-              <img src={playerWalk} className='playerChar wg3'/>
+              <img src={userState.walking_sprite} className='playerChar wg3'/>
               {inventory[0] !== undefined &&
                 <div className='wg4'>
                   <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>

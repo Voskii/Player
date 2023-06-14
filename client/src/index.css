@@ -109,6 +109,15 @@ li{
 
 } */
 
+.batk {
+  margin-left: -100px;
+  
+}
+
+.patk {
+  margin-right: 0px;
+}
+
 .battle-text{
   /* border: #fb33db inset 1px; */
   
@@ -190,9 +199,8 @@ li::marker {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  background: url('./images/arena.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url('./images/arena2.gif');
+  background-size: contain;
   /* background-repeat: no-repeat; */
   width: 500px;
   height: 470px;
