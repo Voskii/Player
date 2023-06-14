@@ -1,5 +1,6 @@
 import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
+import lumpyl from '../images/lumpyl.gif'
 
 export default function BossFight(props){
     const {enemy, username, userState, setUserState, pummel, setPummel, setDie, bossState, setBossState, walk, setWalk, enemies, setEnemies, inventory, setInventory, setUnbw} = props
@@ -13,6 +14,8 @@ export default function BossFight(props){
     const [startFight, setStartFight] = useState(true)
     const [attack, setAttack] = useState(false)
     let key = 0
+    const loot = bossState.item
+    const wutLoot = bossState.itemDesc
     // const maybeRun = readline.question(" Push 'r' to run away, Push 'f' GIVE'EM HELL: ");
     // const scene = () => {
     //     console.log(`scene change`)
@@ -160,11 +163,18 @@ export default function BossFight(props){
                                 <button onClick={running} className="game" style={{transform: 'scale(.5)'}}>Peace</button>
                             </div>
                         :startFight && !isRunning ?
-                            <div className="battle-container">
-                                {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
-                                <img src={bossState.facing_sprite} className='bg2' style={{transform: 'scale(2)'}}/>
-                                <button onClick={tryRun} className="game bg3" style={{transform: 'scale(.5)'}}>Run</button>
-                                <button onClick={throatPunch} className="game bg4" style={{transform: 'scale(.5)'}}>Throat Punch</button>
+                            <div className="boss-card-container">
+                                {/* {!gameOver && battleText.map(line => <li className='battle-text boss-card-c1`' key={key++}>{line}</li>)} */}
+                                
+                                <img src={bossState.facing_sprite} className='boss-card-c2 boss-card-boss' style={{transform: 'scale(2)'}}/>
+                                <div className="game boss-card-c1">
+                                    <h4><span style={{fontFamily: 'Cyberway Riders', fontSize: '2em', color: 'aqua'}}>{bossState.name}</span> Appeared!</h4>
+                                    <h4>Atk: <span style={{fontFamily: 'Cyberway Riders', fontSize: '1.5em', color: 'aqua'}}>{bossState.min} - {bossState.max}</span></h4>
+                                    <h4>Hp: <span style={{fontFamily: 'Cyberway Riders', fontSize: '2em', color: 'aqua'}}>{bossState.health}</span></h4>
+                                    <button onClick={tryRun} className="game" style={{transform: 'scale(.7)'}}>Run</button>
+                                    <button onClick={throatPunch} className="game" style={{transform: 'scale(.7)'}}>Throat Punch</button>
+                                </div>
+                                
                             </div>
                         :!startFight && !isRunning &&
                             <div className="battle-container">
@@ -188,9 +198,14 @@ export default function BossFight(props){
                     </div>
                 }
                 {dub && !gameOver &&
-                    <div style={{textAlign: 'center'}}>
-                        <h1>You Won the Fight!</h1>
-                        <button onClick={prog} className="game">Sweet</button>
+                    <div className="winning">
+                        <h1>You survived! </h1>
+                        <h3><span style={{fontFamily: 'Cyberway Riders', fontSize: '2em', color: 'aqua'}}>{loot}</span> falls to the ground</h3>
+                        <div className="lumpyWin">
+                            <h3 className="wutLoot">"{wutLoot}"</h3>
+                            <img src={lumpyl} className="lumpyl"/>
+                        </div>
+                        <button onClick={prog} className="game" style={{transform: 'scale(.5)'}}>Sweet</button>
                     </div>
                 }
         </div>

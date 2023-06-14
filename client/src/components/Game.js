@@ -7,6 +7,7 @@ import BossFight from './BossFight.js'
 import GameOver from './GameOver.js'
 import { UserContext } from '../context/UserProvider.js'
 import { GameContext } from '../context/GameProvider.js'
+import lumpyr from '../images/lumpyr.gif'
 import { set } from 'mongoose'
 
 
@@ -117,7 +118,7 @@ export default function Game(){
   }   
   }
   let key = 0
-  const mapMe = inventory.map(item => <li key={key++} onClick={() => popItem(item.item, key++)}>{item.item}</li>)
+  const mapMe = inventory.map(item => <li key={key++} onClick={() => popItem(item.item, key++)} style={{color: '#00ffff'}}>{item.item}</li>)
   const breakableWill = () => {
     setItemPower("Lumpy Toast - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'")
     
@@ -145,10 +146,12 @@ export default function Game(){
               :
                 <h1 className='wg1'>...Walking...</h1>
               }
-              <button onClick={chance} className="game chanceButt">{buttArr[numba]}</button>
+              <button onClick={chance} className="game chanceButt wg4">{buttArr[numba]}</button>
+              <img src={lumpyr} className='lumpyWalk wg3'/>
               <img src={userState.walking_sprite} className='playerChar wg3'/>
+              
               {inventory[0] !== undefined &&
-                <div className='wg4'>
+                <div className='wg2'>
                   <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>
                   {whatsBag && <ul className=''>{mapMe}</ul>}
                 </div>
