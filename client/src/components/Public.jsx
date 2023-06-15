@@ -1,6 +1,6 @@
 import React from 'react'
-import TodoList from './TodoList.js'
-import Todo from './Todo.js'
+import TodoList from './TodoList.jsx'
+import Todo from './Todo.jsx'
 
 export default function Public(){
   return (

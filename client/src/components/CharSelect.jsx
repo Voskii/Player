@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react'
-import { GameContext } from '../context/GameProvider.js'
+import { GameContext } from '../context/GameProvider.jsx'
 
 
 export default function CharSelect(){

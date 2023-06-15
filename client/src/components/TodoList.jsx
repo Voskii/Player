@@ -1,5 +1,5 @@
 import React from 'react'
-import Todo from './Todo.js'
+import Todo from './Todo.jsx'
 
 export default function TodoList(props){
   const { todos } = props 

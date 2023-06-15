@@ -1,11 +1,11 @@
 import React, { useContext, useState} from 'react'
-import TodoForm from './TodoForm.js'
-import TodoList from './TodoList.js'
-import Todo from './Todo.js'
-import Welcome from './Welcome.js'
-import BossFight from './BossFight.js'
-import { UserContext } from '../context/UserProvider.js'
-import { GameContext } from '../context/GameProvider.js'
+import TodoForm from './TodoForm.jsx'
+import TodoList from './TodoList.jsx'
+import Todo from './Todo.jsx'
+import Welcome from './Welcome.jsx'
+import BossFight from './BossFight.jsx'
+import { UserContext } from '../context/UserProvider.jsx'
+import { GameContext } from '../context/GameProvider.jsx'
 
 export default function GameOver(){
     console.log(`game over comp`)
