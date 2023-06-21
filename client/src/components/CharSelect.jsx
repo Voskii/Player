@@ -12,7 +12,8 @@ export default function CharSelect(){
             ...prev,
             facing_sprite: char.pf,
             walking_sprite: char.pw, 
-            attacking_sprite: char.pa
+            attacking_sprite: char.pa,
+            running_sprite: char.pr
         }))
         setWalk(!walk)
         setWelcome(false)
@@ -23,7 +24,7 @@ export default function CharSelect(){
     
     return (
 
-        <div>{mapMe}</div>
+        <div className='char-select-scene'>{mapMe}</div>
 
     )
 }

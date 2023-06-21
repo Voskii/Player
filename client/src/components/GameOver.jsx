@@ -13,7 +13,7 @@ export default function GameOver(){
         <div>
             <div style={{textAlign: 'center'}}>
                 <h1 className="game-over-text">GAME OVER</h1>
-                <h2 className="battle-text">Lumpy Toast decapitates you lol - 'BAAAAAAAABE BAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT DEFEATED, I MEAN I DEFEATED ALL THOSE MONSTERS THAT SOLE OUR TREASURE!'</h2>
+                {/* <h2 className="battle-text">Lumpy Toast decapitates you lol - 'BAAAAAAAABE BAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT DEFEATED, I MEAN I DEFEATED ALL THOSE MONSTERS THAT STOLE OUR TREASURE!'</h2> */}
                 <form>
                     <button className="game">Resterrt</button>
                 </form>

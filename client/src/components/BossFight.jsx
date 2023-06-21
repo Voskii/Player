@@ -8,6 +8,7 @@ export default function BossFight(props){
     const [gameOver, setGameOver] = useState(false)
     const [lumpyWins, setLumpyWins] = useState(false)
     const [battleText, setBattleText] = useState([`${enemy.name} Appeared`])
+    const [runAttack, setRunAttack] = useState(false)
     const [isRunning, setIsRunning] = useState(false)
     const [dub, setDub] = useState(false)
     const [index, setIndex] = useState(0)
@@ -36,7 +37,7 @@ export default function BossFight(props){
                 })
             })
             setBattleText(prev => [
-                ...prev,
+                
                 `${username} made it away but took ${rNum} dmg`
             ])
             setIsRunning(!isRunning)
@@ -44,6 +45,9 @@ export default function BossFight(props){
         } else if (num < 0.5){
             //start fight
             console.log(`RUN func - boned`)
+            
+                //setAttack state to true and enable boss fighting css ~500ms
+            
             const rNum = Math.ceil(Math.random() * (enemy.max - enemy.min) + enemy.min)
             setUserState(prev => {
                 return ({
@@ -52,9 +56,15 @@ export default function BossFight(props){
                 })
             })
             setBattleText(prev => [
-            ...prev,
+            
             `${username} tried to run, ${enemy.name} slaps for ${rNum} reducing ${username}'s HP to ${userState.health - rNum} lol`
             ])
+            setStartFight(false)
+            setRunAttack(true)
+            const id = setInterval(() => setRunAttack(false), 1000)
+            return function cleanup(){
+                clearInterval(id)
+            }
         }
     }
 
@@ -117,8 +127,9 @@ export default function BossFight(props){
             setUnbw(true)
         }
         if(enemies.length === 1){
+            setLumpyWins(true)
             setGameOver(true) 
-            // setLumpyWins(true)
+            
             return 
         }
         setDub(false)
@@ -158,9 +169,10 @@ export default function BossFight(props){
                 {!gameOver && !dub &&
                     <div className="">
                         {isRunning ?
-                            <div className="battle-container">
+                            <div className="running-container">
                                 {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
-                                <button onClick={running} className="game" style={{transform: 'scale(.5)'}}>Peace</button>
+                                <img src={userState.running_sprite} className='' style={{transform: ''}}/>
+                                <button onClick={running} className="game bg4" >Peace</button>
                             </div>
                         :startFight && !isRunning ?
                             <div className="boss-card-container">
@@ -178,8 +190,12 @@ export default function BossFight(props){
                             </div>
                         :!startFight && !isRunning &&
                             <div className="battle-container">
-                                {!gameOver && battleText.map(line => <li className='battle-text bg1`' key={key++}>{line}</li>)}
-                                <img src={attack? bossState.attacking_sprite : bossState.facing_sprite} className={attack? 'bg4 batk' : 'bg4'}/>
+                                {!gameOver && battleText.map(line => <li className='battle-text btext`' key={key++}>{line}</li>)}
+                                {!runAttack ? 
+                                    <img src={attack? bossState.attacking_sprite : bossState.facing_sprite} className={attack? 'bg4 batk' : 'bg4'}/>
+                                :
+                                    <img src={bossState.attacking_sprite} className='bg4 batk' />
+                                }
                                 <button onClick={tryRun} className="game bg1" style={{transform: 'scale(.5)'}}>Run</button>
                                 <button onClick={throatPunch} className="game bg2" style={{transform: 'scale(.5)'}}>Throat Punch</button>
                                 <img src={attack? userState.attacking_sprite : userState.facing_sprite} className={attack? 'bg3 patk' : 'bg3'}/>
@@ -191,9 +207,10 @@ export default function BossFight(props){
                 {gameOver &&
                     <div style={{textAlign: 'center'}}>
                         <h1 className="game-over-text">GAME OVER</h1>
-                        {lumpyWins && <h2 className="battle-text">Lumpy Toast decapitates you lol - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'</h2>}
+                        {lumpyWins && <h2 className="">Lumpy Toast decapitates you lol - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'</h2>}
+                        <img src={lumpyl} className="lumpyl"/>
                         <form onSubmit={restart}>
-                            <button className="game">Resterrt</button>
+                            <button className="game" style={{fontFamily: 'Cyberway Riders', fontSize: '1.5em', color: 'aqua'}}>Resterrt</button>
                         </form>
                     </div>
                 }

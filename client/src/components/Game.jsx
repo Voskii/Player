@@ -8,7 +8,7 @@ import GameOver from './GameOver.jsx'
 import { UserContext } from '../context/UserProvider.jsx'
 import { GameContext } from '../context/GameProvider.jsx'
 import lumpyr from '../images/lumpyr.gif'
-import { set } from 'mongoose'
+import lumpyl from '../images/lumpyl.gif'
 
 
 
@@ -146,13 +146,13 @@ export default function Game(){
               :
                 <h1 className='wg1'>...Walking...</h1>
               }
-              <button onClick={chance} className="game chanceButt wg4">{buttArr[numba]}</button>
+              <button onClick={chance} className="game chanceButt wg4" style={{fontFamily: 'Cyberway Riders', fontSize: '1.5em', color: 'aqua'}}>{buttArr[numba]}</button>
               <img src={lumpyr} className='lumpyWalk wg3'/>
               <img src={userState.walking_sprite} className='playerChar wg3'/>
               
               {inventory[0] !== undefined &&
                 <div className='wg2'>
-                  <button onClick={() => setWhatsBag(!whatsBag)} className="game">Bag</button>
+                  <button onClick={() => setWhatsBag(!whatsBag)} className="game" style={{fontFamily: 'Cyberway Riders', fontSize: '1.5em', color: 'aqua'}}>Bag</button>
                   {whatsBag && <ul className=''>{mapMe}</ul>}
                 </div>
               }
@@ -165,7 +165,7 @@ export default function Game(){
             </div>
         : die && endGame && !walk &&
           <div>
-            {itemPower && <h3>{itemPower}</h3>}
+            <img src={lumpyl} className="lumpyl"/>
             <GameOver />
           </div>
         }

@@ -5,6 +5,28 @@ header{
   font-size: 6em;
 }
 
+.fish{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* z-index: 1; */
+  /* top: 1px; */
+  font-family: 'Cyberway Riders';  
+  color: aqua;
+  /* background-color: var(--dg); */
+  height: fit-content;
+  width: 100%;
+}
+
+.char-select-scene{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .sticky-box{
   position: sticky;
   top: 1px;
@@ -22,7 +44,7 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  filter:opacity(.5);
+  filter: opacity(.5);
   padding: 0;
   margin: 0;
 }
@@ -79,7 +101,7 @@ li{
   /* box-shadow: 2px 2px 1px var(--p), 4px 4px 0 var(--dg), 6px 6px 1px var(--p); */
 
 .game-container{
-  max-width: 500px;
+  max-width: 550px;
   max-height: 470px;
   display: flex;
   flex-direction: column;
@@ -109,12 +131,14 @@ li{
 }
 
 .batk {
-  margin-left: -100px;
-  
+  overflow: hidden;
+  margin-left: -160px;
 }
 
 .patk {
   margin-right: 0px;
+  overflow: hidden;
+  padding-bottom: 265px;
 }
 
 .battle-text{
@@ -149,7 +173,7 @@ li{
   grid-template-rows: repeat(2, 1fr);
   background: url('./images/bg2.gif');
   /* background-repeat: no-repeat; */
-  width: 500px;
+  width: 550px;
   height: 470px;
   overflow: hidden;
   border: #fb33db double 8px;
@@ -197,7 +221,7 @@ li::marker {
   color: #fb33db;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
+  grid-template-rows: 2, 1fr;
   background: url('./images/arena2.gif');
   background-size: contain;
   /* background-repeat: no-repeat; */
@@ -246,7 +270,7 @@ li::marker {
   background: url('./images/arena2.gif');
   background-size: contain;
   /* background-repeat: no-repeat; */
-  width: 500px;
+  width: 550px;
   height: 470px;
   
   border: #fb33db double 8px;
@@ -273,6 +297,22 @@ li::marker {
 .bg4{
   grid-column: 2/2;
   grid-row: 2/2;
+  
+}
+
+.btext{
+  
+}
+
+.running-container{
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  color: #fb33db;
+  width: 300px;
+  height: fit-content;
+  border: #fb33db double 8px;
+  overflow: hidden;
 }
 
 .winning{
@@ -302,7 +342,7 @@ padding-right: 20px;
 
 .lumpyWalk{
   transform: scale(.5);
-  margin-left: 45px;
+  margin-left: 55px;
 }
 
 .lumpyWin{

@@ -19,9 +19,9 @@ export default function App(){
     <div className="app">
       <div className='page wrap'>
         { token && 
-        <div className={isTabletOrMobile? 'sticky-box shrink' : 'sticky-box'}>
+        <div className={isTabletOrMobile? 'sticky-box shrink' : 'fish'}>
           <Header />
-        <Navbar logout={logout}/>
+          <Navbar logout={logout}/>
         </div>
         }
         <Routes>
