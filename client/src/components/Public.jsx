@@ -5,7 +5,7 @@ import Todo from './Todo.jsx'
 export default function Public(){
   return (
     <div className="public">
-
+      fish
     </div>
   )
 }

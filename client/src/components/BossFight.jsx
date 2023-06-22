@@ -1,6 +1,7 @@
 import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
 import lumpyl from '../images/lumpyl.gif'
+import Credits from "./Credits.jsx";
 
 export default function BossFight(props){
     const {enemy, username, userState, setUserState, pummel, setPummel, setDie, bossState, setBossState, walk, setWalk, enemies, setEnemies, inventory, setInventory, setUnbw} = props
@@ -61,7 +62,7 @@ export default function BossFight(props){
             ])
             setStartFight(false)
             setRunAttack(true)
-            const id = setInterval(() => setRunAttack(false), 1000)
+            const id = setTimeout(() => setRunAttack(false), 1000)
             return function cleanup(){
                 clearInterval(id)
             }
@@ -147,7 +148,7 @@ export default function BossFight(props){
     const charsAttack = () => {
         //setAttack state to true and enable char fighting css ~500ms
         setAttack(true)
-        const id = setInterval(() => setAttack(false), 1000)
+        const id = setTimeout(() => setAttack(false), 1000)
         return function cleanup(){
             clearInterval(id)
         }
@@ -205,13 +206,15 @@ export default function BossFight(props){
                 }
             </div>
                 {gameOver &&
-                    <div style={{textAlign: 'center'}}>
+                    <div style={{textAlign: 'center', paddingTop: '80px'}}>
                         <h1 className="game-over-text">GAME OVER</h1>
+                        
                         {lumpyWins && <h2 className="">Lumpy Toast decapitates you lol - 'BAAAAAAAAAAAAABE BAAAAAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT'S GOT ALL OUR STUFF THOSE ANGRY BOSSES STOLE FROM US!'</h2>}
                         <img src={lumpyl} className="lumpyl"/>
                         <form onSubmit={restart}>
                             <button className="game" style={{fontFamily: 'Cyberway Riders', fontSize: '1.5em', color: 'aqua'}}>Resterrt</button>
                         </form>
+                        <Credits />
                     </div>
                 }
                 {dub && !gameOver &&

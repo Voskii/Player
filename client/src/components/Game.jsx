@@ -133,7 +133,7 @@ export default function Game(){
 // },[userState.health] || [bossState.health])
 
   return (
-    <section className="game game-container wrap">
+    <div className="game game-container wrap">
       
         {welcome && <Welcome username={username} welMsg={welMsg} userState={userState} handleChange={handleChange} scene={scene} index={index} playerSelect={playerSelect} setPlayerSelect={setPlayerSelect}/>}
         
@@ -171,7 +171,7 @@ export default function Game(){
         }
         {pummel && <BossFight restart={restart} username={username} enemy={boss} userState={userState} setUserState={setUserState} pummel={pummel} setPummel={setPummel} bossState={bossState} setBossState={setBossState} walk={walk} setWalk={setWalk} enemies={enemies} setEnemies={setEnemies} inventory={inventory} setInventory={setInventory} setUnbw={setUnbw} setDie={setDie}/>}
       </div>
-    </section>
+    </div>
   )
 }
 

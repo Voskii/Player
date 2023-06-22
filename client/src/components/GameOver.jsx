@@ -6,6 +6,7 @@ import Welcome from './Welcome.jsx'
 import BossFight from './BossFight.jsx'
 import { UserContext } from '../context/UserProvider.jsx'
 import { GameContext } from '../context/GameProvider.jsx'
+import Credits from './Credits.jsx'
 
 export default function GameOver(){
     console.log(`game over comp`)
@@ -13,10 +14,11 @@ export default function GameOver(){
         <div>
             <div style={{textAlign: 'center'}}>
                 <h1 className="game-over-text">GAME OVER</h1>
-                {/* <h2 className="battle-text">Lumpy Toast decapitates you lol - 'BAAAAAAAABE BAAABE, SMOOTH TOAST I GOT US DUNNUH!!! AND IT DEFEATED, I MEAN I DEFEATED ALL THOSE MONSTERS THAT STOLE OUR TREASURE!'</h2> */}
+                <Credits />
                 <form>
                     <button className="game">Resterrt</button>
                 </form>
+                
             </div>
         </div>
     )

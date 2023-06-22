@@ -20,8 +20,8 @@ export default function App(){
       <div className='page wrap'>
         { token && 
         <div className={isTabletOrMobile? 'sticky-box shrink' : 'fish'}>
-          <Header />
-          <Navbar logout={logout}/>
+          <Header logout={logout}/>
+          {/* <Navbar /> */}
         </div>
         }
         <Routes>

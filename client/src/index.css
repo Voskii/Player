@@ -2,20 +2,21 @@ header{
   align-self: center;
   text-align: center;
   font-family: 'Cyberway Riders';
-  font-size: 6em;
 }
 
 .fish{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   /* z-index: 1; */
   /* top: 1px; */
   font-family: 'Cyberway Riders';  
   color: aqua;
   /* background-color: var(--dg); */
-  height: fit-content;
+  height: 385px;
   width: 100%;
+  margin-top: -200px;
 }
 
 .char-select-scene{
@@ -50,12 +51,13 @@ header{
 }
 
 .logButt{
-  position: sticky;
+  
   top: 12px;
   font-size: 2em;
   color: aqua;
   font-family: 'Cyberway Riders';
 }
+
 .page{
   display: flex;
   flex-direction: column;
@@ -84,13 +86,13 @@ body {
     monospace;
 } */
 
-.wrap {
+/* .wrap {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
+} */
 
 li{
   transition: var(--speed);
@@ -101,15 +103,15 @@ li{
   /* box-shadow: 2px 2px 1px var(--p), 4px 4px 0 var(--dg), 6px 6px 1px var(--p); */
 
 .game-container{
-  max-width: 550px;
-  max-height: 470px;
+  width: 550px;
+  max-height: 630px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: auto;
-  padding: 100px 35px;
+  
 }
 
 .welcome-text{
@@ -153,7 +155,8 @@ li{
 }
 
 .navbar{
-  
+  height: 40px;;
+  width: 40px;
 }
 
 .game-over-text{
@@ -351,14 +354,24 @@ padding-right: 20px;
   
 }
 
+.credits{
+  height:fit-content;
+}
+
+.all-credits{
+  text-align: center; 
+  height: 600px;
+  width: 800px;
+  overflow: scroll;
+}
 /* .app{
   display: flex;
   justify-content: center;
   align-items: center;
   
-} */
+} 
 
-/* .page{
+.page{
   max-width: fit-content;
   max-height: fit-content;
 } */
