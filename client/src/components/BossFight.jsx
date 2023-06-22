@@ -38,7 +38,7 @@ export default function BossFight(props){
                 })
             })
             setBattleText(prev => [
-                
+
                 `${username} made it away but took ${rNum} dmg`
             ])
             setIsRunning(!isRunning)
@@ -219,7 +219,7 @@ export default function BossFight(props){
                 }
                 {dub && !gameOver &&
                     <div className="winning">
-                        <h1>You survived! </h1>
+                        <h1>You survived!</h1>
                         <h3><span style={{fontFamily: 'Cyberway Riders', fontSize: '2em', color: 'aqua'}}>{loot}</span> falls to the ground</h3>
                         <div className="lumpyWin">
                             <h3 className="wutLoot">"{wutLoot}"</h3>
