@@ -6,11 +6,13 @@ const mongoose = require('mongoose')
 var { expressjwt: jwt } = require("express-jwt");
 require('dotenv').config()
 uri = process.env.URI
+const path = require("path")
 
 process.env.SECRET
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect(uri, console.log("Connected to the DB"));
 
@@ -26,6 +28,10 @@ app.use((err, req, res, next) => {
   }
   return res.send({errMsg: err.message})
 })
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(9000, () => {
   console.log(`Server is running on local port 9000`)
