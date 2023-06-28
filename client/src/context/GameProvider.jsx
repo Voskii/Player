@@ -50,7 +50,6 @@ export default function GameProvider(props){
     const [welcome, setWelcome] = useState(true)
     const [walk, setWalk] = useState(false)
     
-
     return (
     <GameContext.Provider value={{
           inventory,
